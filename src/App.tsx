@@ -20,7 +20,7 @@ async function postArticle(url: string) {
 	});
 
 	const data = await response.json();
-	const html = data.article_title + data.article_body
+	const html = data.title + data.content
 	return html
 }
 
