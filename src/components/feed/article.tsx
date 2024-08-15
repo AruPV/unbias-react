@@ -7,7 +7,7 @@ interface props{
 function Article({html}: props){
 	return(
 		<>
-		<div className="prose dark:prose-invert line-clamp-[9]" dangerouslySetInnerHTML={{__html: html}}/>
+		<div className="prose dark:prose-invert " dangerouslySetInnerHTML={{__html: html}}/>
 		</>
 	)	
 }
