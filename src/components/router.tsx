@@ -1,4 +1,3 @@
-import * as ReactDOM from "react-dom"
 import {
 	createBrowserRouter,
 	RouterProvider,
