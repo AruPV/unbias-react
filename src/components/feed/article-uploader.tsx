@@ -3,6 +3,7 @@ import {Input} from "@/components/ui/input"
 import { Button } from '@/components/ui/button'
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 import Article from "./article";
+import TestArticle from "./test-article";
 
 async function postArticle(url: string, unbias: boolean): Promise<string> {
 	/**
@@ -68,7 +69,7 @@ export default function ArticleUploader({addArticlesCallback}: props){
 
   return (
 		<div className="flex flex-col items-center">
-			<div className='my-3 flex flex-row items-center '>
+				<div className='my-3 flex flex-row items-center '>
 				<Input 
 					onSubmit={handleSubmit} 
 					onChange={handleInputChange} 
@@ -84,6 +85,7 @@ export default function ArticleUploader({addArticlesCallback}: props){
 			{articles.length == 1 && 
 				<Button onClick={handleUnbias} className="my-2">Unbias</Button>
 			}
+			<TestArticle/>
 		</div>
   )
 }
