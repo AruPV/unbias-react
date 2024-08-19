@@ -10,7 +10,7 @@ async function postArticle(url: string, unbias: boolean): Promise<ArticleData> {
 		* Send post request to create article
 		*/
 
-	const response = await fetch(`https://${backendUrl}/articles`, {
+	const response = await fetch(`${backendUrl}/articles`, {
 		method: "POST",
 		headers:{
 			"Content-type": "application/json; charset=UTF-8"
