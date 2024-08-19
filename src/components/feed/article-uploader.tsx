@@ -9,7 +9,7 @@ async function postArticle(url: string, unbias: boolean): Promise<string> {
 		* Send post request to create article
 		*/
 
-	const response = await fetch(`http://${backendUrl}/articles`, {
+	const response = await fetch(`https://${backendUrl}/articles`, {
 		method: "POST",
 		headers:{
 			"Content-type": "application/json; charset=UTF-8"
