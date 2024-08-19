@@ -3,13 +3,14 @@ import {Input} from "@/components/ui/input"
 import { Button } from '@/components/ui/button'
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 import Article from "./article";
+import { ArticleData } from "@/types";
 
-async function postArticle(url: string, unbias: boolean): Promise<string> {
+async function postArticle(url: string, unbias: boolean): Promise<ArticleData> {
 	/**
 		* Send post request to create article
 		*/
 
-	const response = await fetch(`https://${backendUrl}/articles`, {
+	const response = await fetch(`http://${backendUrl}/articles`, {
 		method: "POST",
 		headers:{
 			"Content-type": "application/json; charset=UTF-8"
@@ -20,14 +21,13 @@ async function postArticle(url: string, unbias: boolean): Promise<string> {
 		}),
 	});
 
-	const data = await response.json();
-	const html = data.title + data.content
-	return html
+	const data: ArticleData = await response.json();
+	return data
 }
 
 async function processURL(
 	url: string,
-	addArticles: (newArticle: string)=>void,
+	addArticles: (newArticle: ArticleData)=>void,
 	isUnbias: boolean,
 ): Promise<void> {
 	/**
@@ -39,18 +39,26 @@ async function processURL(
 
 
 interface props{
-	addArticlesCallback?: (article: string)=>void
+	addArticlesCallback?: (article: ArticleData)=>void
 }
 
 export default function ArticleUploader({addArticlesCallback}: props){
-	const [articles, setArticles] = useState<string[]>([])
+	const [articles, setArticles] = useState<ArticleData[]>([])
 	const [url, setUrl] =	 useState("")
 
-	const	addArticles = (article:string)=>{
+	const	addArticles = (article:ArticleData)=>{
 		if (addArticlesCallback !== undefined){
 			addArticlesCallback(article)
 		}
 		setArticles([...articles, article])
+	}
+
+	const clearAddArticles = (article:ArticleData) =>{
+		if (addArticlesCallback !== undefined){
+			addArticlesCallback(article)
+		}
+		console.log(article)
+		setArticles([article])
 	}
 
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>)=>{
@@ -59,7 +67,7 @@ export default function ArticleUploader({addArticlesCallback}: props){
 
 	const handleSubmit = ()=>{
 		setArticles([])
-		processURL(url, addArticles, false)
+		processURL(url, clearAddArticles, false)
 	}
 
 	const handleUnbias = ()=>{
@@ -79,7 +87,7 @@ export default function ArticleUploader({addArticlesCallback}: props){
 				<Button onClick={handleSubmit} variant={'default'}> Fetch </Button>
 			</div>
 			{articles.map(article=>{
-				return <Article html={article} />
+				return <Article data={article} />
 			})}
 			{articles.length == 1 && 
 				<Button onClick={handleUnbias} className="my-2">Unbias</Button>
