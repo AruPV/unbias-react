@@ -6,7 +6,7 @@ import {
 	AccordionContent, 
 	AccordionItem, 
 	AccordionTrigger 
-} from "@radix-ui/react-accordion";
+} from "@/components/ui/accordion";
 
 interface props{
 	data: ArticleData
@@ -22,7 +22,13 @@ function Article({data}:props){
 		setShowMore(!showMore)
 	}
 
-	const biased_terms:string[] = data.top_biased_words.slice(0,5)
+	const isValid = (val:any) =>{
+		if (val === undefined) return false
+		if (val === null) return false
+		return true
+	}
+
+	const biased_terms:string[] = isValid(data.top_biased_words) ? data.top_biased_words.slice(0,5) : []
 
 	return(
 		<div className="">
@@ -30,13 +36,13 @@ function Article({data}:props){
 			<Button className="my-2" variant={"secondary"} onClick={toggleShow}>
 				{!showMore? "Show more" : "Show less"}
 			</Button>
-			<Accordion type="single" collapsible className="w-full">
+			<Accordion type="single" defaultValue="item-1" collapsible>
 				<AccordionItem value="item-1">
 					<AccordionTrigger className="text-primary font-bold text-xl"> ~ Metrics </AccordionTrigger>
 					<AccordionContent>
 						<ul>
-							<li>🌡️<b>Bias Score</b>: {data.bias_score}</li>
-							<li>⚡<b>Shock Score</b>: {data.shock_score}</li>
+							<li>🌡️<b>Bias Score</b>: {isValid(data.bias_score) && data.bias_score}</li>
+							<li>⚡<b>Shock Score</b>: {isValid(data.shock_score) && data.shock_score}</li>
 							<li>🔝<b>Biased Terms</b>: <ul>{biased_terms.map(term =>(
 								<li className="pl-8">• <i>{term}</i></li>
 							))}</ul></li>

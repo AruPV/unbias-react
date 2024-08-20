@@ -1,11 +1,11 @@
 import { useState, Dispatch, SetStateAction} from "react";
 import {Input} from "@/components/ui/input"
 import { Button } from '@/components/ui/button'
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
 import Article from "./article";
 import { ArticleData } from "@/types";
 import ArticleSkeleton from "./article-skeleton";
 import { toast } from "sonner";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 async function postArticle(url: string, unbias: boolean): Promise<ArticleData> {
 	/**
@@ -101,9 +101,12 @@ export default function ArticleUploader({addArticlesCallback}: props){
 					Fetch 
 				</Button>
 			</div>
-			{articles.map(article=>{
-				return <Article data={article} />
-			})}
+			<div className="flex flex-col divide-y space-y-4 divide-dashed">
+				{articles.map(article=>{
+					return <Article data={article} />
+				})}
+				{isLoading && <ArticleSkeleton/>}
+			</div>
 			{articles.length == 1 && 
 				<Button 
 					onClick={handleUnbias} 
@@ -113,7 +116,6 @@ export default function ArticleUploader({addArticlesCallback}: props){
 					Unbias
 				</Button>
 			}
-			{isLoading && <ArticleSkeleton/>}
 		</div>
   )
 }
