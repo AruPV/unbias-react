@@ -16,17 +16,22 @@ function Article({data}:props){
 		setShowMore(!showMore)
 	}
 
-	const biased_terms:string = data.top_biased_words.join(', ')
+	const biased_terms:string[] = data.top_biased_words.slice(0,5)
 
 	return(
-		<div className="prose dark:prose-invert my-4">
-			<div className={"" + (showMore? "" : "line-clamp-[8]")} dangerouslySetInnerHTML={{__html: html}}/>
+		<div className="">
+			<div className={"prose dark:prose-invert my-4 " + (showMore? "" : "line-clamp-[8]")} dangerouslySetInnerHTML={{__html: html}}/>
 			<Button className="my-2" variant={"secondary"} onClick={toggleShow}>
 				{!showMore? "Show more" : "Show less"}
 			</Button>
-			<p>Bias Score: {data.bias_score}</p>
-			<p>Shock Score: {data.shock_score}</p>
-			<p>Top Biased Terms: {biased_terms}</p>
+			<h3 className="text-xl font-bold my-2 text-primary">~ Metrics </h3>
+			<ul>
+				<li>🌡️<b>Bias Score</b>: {data.bias_score}</li>
+				<li>⚡<b>Shock Score</b>: {data.shock_score}</li>
+				<li>🔝<b>Biased Terms</b>: <ul>{biased_terms.map(term =>(
+					<li className="pl-8">• <i>{term}</i></li>
+				))}</ul></li>
+			</ul>
 		</div>
 	)	
 }

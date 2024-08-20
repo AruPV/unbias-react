@@ -1,5 +1,5 @@
 import { ModeToggle } from "./mode-toggle"
-import { Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar"
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react"
 
 function Header(){
   return(
@@ -11,10 +11,12 @@ function Header(){
 			</div>
 			<div className="flex flex-row">
 				<ModeToggle/>
-				<Avatar>
-					<AvatarImage src="https://i.pinimg.com/564x/09/43/c3/0943c3d3e6dd5e8afe32813e4286542a.jpg"/>
-					<AvatarFallback>KZ</AvatarFallback>
-				</Avatar>
+				<SignedOut>
+					<SignInButton/>
+				</SignedOut>
+				<SignedIn>
+					<UserButton/>
+				</SignedIn>
 			</div>
     </div>
   )
