@@ -5,6 +5,7 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL;
 import Article from "./article";
 import { ArticleData } from "@/types";
 import ArticleSkeleton from "./article-skeleton";
+import { toast } from "sonner";
 
 async function postArticle(url: string, unbias: boolean): Promise<ArticleData> {
 	/**
@@ -35,10 +36,12 @@ async function processURL(
 	/**
 		* Deal with async fetching and updating of articles
 		*/
+	toast("Retrieving Article")
 	setIsLoading(true)
 	const article = await postArticle(url, isUnbias)
 	addArticles(article)
 	setIsLoading(false)
+	toast("Article Retrieved!")
 }
 
 

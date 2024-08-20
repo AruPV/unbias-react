@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { ArticleData } from "@/types";
+import { 
+	Accordion, 
+	AccordionContent, 
+	AccordionItem, 
+	AccordionTrigger 
+} from "@radix-ui/react-accordion";
 
 interface props{
 	data: ArticleData
@@ -24,14 +30,20 @@ function Article({data}:props){
 			<Button className="my-2" variant={"secondary"} onClick={toggleShow}>
 				{!showMore? "Show more" : "Show less"}
 			</Button>
-			<h3 className="text-xl font-bold my-2 text-primary">~ Metrics </h3>
-			<ul>
-				<li>🌡️<b>Bias Score</b>: {data.bias_score}</li>
-				<li>⚡<b>Shock Score</b>: {data.shock_score}</li>
-				<li>🔝<b>Biased Terms</b>: <ul>{biased_terms.map(term =>(
-					<li className="pl-8">• <i>{term}</i></li>
-				))}</ul></li>
-			</ul>
+			<Accordion type="single" collapsible className="w-full">
+				<AccordionItem value="item-1">
+					<AccordionTrigger className="text-primary font-bold text-xl"> ~ Metrics </AccordionTrigger>
+					<AccordionContent>
+						<ul>
+							<li>🌡️<b>Bias Score</b>: {data.bias_score}</li>
+							<li>⚡<b>Shock Score</b>: {data.shock_score}</li>
+							<li>🔝<b>Biased Terms</b>: <ul>{biased_terms.map(term =>(
+								<li className="pl-8">• <i>{term}</i></li>
+							))}</ul></li>
+						</ul>
+					</AccordionContent>
+				</AccordionItem>
+			</Accordion>
 		</div>
 	)	
 }

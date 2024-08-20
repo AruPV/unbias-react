@@ -1,6 +1,7 @@
 import Header from '@/components/ui/header'
 import Footer from './components/ui/footer'
 import { Outlet } from 'react-router-dom'
+import { Toaster } from '@/components/ui/sonner'
 
 
 
@@ -11,6 +12,7 @@ function App() {
       <Header/>
 			<div className="flex-grow">
 				<Outlet/>
+				<Toaster/>
 			</div>
 			<Footer/>
 		</div>
