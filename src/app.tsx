@@ -3,8 +3,6 @@ import Footer from './components/ui/footer'
 import { Outlet } from 'react-router-dom'
 import { Toaster } from '@/components/ui/sonner'
 
-
-
 function App() {
 
   return (

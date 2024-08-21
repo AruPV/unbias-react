@@ -7,9 +7,11 @@ function Header(){
   return(
     <div className="relative sticky top-0 py-2 flex flex-row justify-between px-2 py-1 bg-background border border-x-transparent border-t-transparent content-center">
 			<div className="">
-				<p className="inline font-bold text-3xl text-primary">
-					Unbias
-				</p>
+				<Link to={"/"}>
+					<p className="inline font-bold text-3xl text-primary">
+						Unbias
+					</p>
+				</Link>
 			</div>
 			<Link to={"/new"}>
 				<Button>
