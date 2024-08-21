@@ -5,43 +5,33 @@ import Article from "./article";
 import { ArticleData } from "@/types";
 import ArticleSkeleton from "./article-skeleton";
 import { toast } from "sonner";
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
-
-async function postArticle(url: string, unbias: boolean): Promise<ArticleData> {
-	/**
-		* Send post request to create article
-		*/
-
-	const response = await fetch(`${backendUrl}/articles`, {
-		method: "POST",
-		headers:{
-			"Content-type": "application/json; charset=UTF-8"
-		},
-		body: JSON.stringify({
-			unbias: unbias,
-			url: url,
-		}),
-	});
-
-	const data: ArticleData = await response.json();
-	return data
-}
+import backendRequest from "../utils/backend-requester";
 
 async function processURL(
 	url: string,
 	addArticles: (newArticle: ArticleData)=>void,
 	setIsLoading: Dispatch<SetStateAction<boolean>>,
 	isUnbias: boolean,
+	authenticatedPost: (body: {}) => Promise<any>,
 ): Promise<void> {
 	/**
 		* Deal with async fetching and updating of articles
 		*/
-	toast("Retrieving Article")
+	const body = { unbias: isUnbias, url: url }
 	setIsLoading(true)
-	const article = await postArticle(url, isUnbias)
-	addArticles(article)
-	setIsLoading(false)
-	toast("Article Retrieved!")
+
+	try{
+		toast("Retrieving Article")
+		const response = await authenticatedPost(body)
+		const data: ArticleData = await response.json()
+		addArticles(data)
+		toast("Article Retrieved!")
+	} catch (error) {
+		console.log(error)
+		toast("An error ocurred. The article might not be parseable, but do feel free to try again!")
+	} finally {
+		setIsLoading(false)
+	}
 }
 
 
@@ -52,6 +42,7 @@ export default function ArticleUploader({addArticlesCallback}: props){
 	const [articles, setArticles] = useState<ArticleData[]>([])
 	const [isLoading, setIsLoading] = useState(false)
 	const [url, setUrl] =	 useState("")
+	const authenticatedPost = backendRequest("POST")
 
 	const	addArticles = (article:ArticleData)=>{
 		if (addArticlesCallback !== undefined){
@@ -75,13 +66,13 @@ export default function ArticleUploader({addArticlesCallback}: props){
 	const handleSubmit = ()=>{
 		if(isLoading){return}
 		setArticles([])
-		processURL(url, clearAddArticles, setIsLoading, false)
+		processURL(url, clearAddArticles, setIsLoading, false, authenticatedPost)
 	}
 
 
 	const handleUnbias = ()=>{
 		if(isLoading){return}
-		processURL(url, addArticles, setIsLoading, true)
+		processURL(url, addArticles, setIsLoading, true, authenticatedPost)
 	}
 
   return (
