@@ -1,4 +1,3 @@
-import Tag from "../ui/tag"
 import VersionTag from "./original-unbiased-tag" 
 import { ArticlePairData } from "@/types"
 import Article from "./article"
