@@ -42,7 +42,7 @@ export default function ArticleUploader({addArticlesCallback}: props){
 	const [articles, setArticles] = useState<ArticleData[]>([])
 	const [isLoading, setIsLoading] = useState(false)
 	const [url, setUrl] =	 useState("")
-	const authenticatedPost = backendRequest("POST")
+	const authenticatedPost = backendRequest("articles", "POST")
 
 	const	addArticles = (article:ArticleData)=>{
 		if (addArticlesCallback !== undefined){

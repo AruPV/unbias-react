@@ -10,9 +10,10 @@ import {
 
 interface props{
 	data: ArticleData
+	className?: string
 }
 
-function Article({data}:props){
+function Article({data, className}:props){
 	const [showMore, setShowMore] = useState(false);
 	const html = data.title + data.content
 
@@ -31,7 +32,7 @@ function Article({data}:props){
 	const biased_terms:string[] = isValid(data.top_biased_words) ? data.top_biased_words.slice(0,5) : []
 
 	return(
-		<div className="">
+		<div className={className}>
 			<div className={"prose dark:prose-invert my-4 " + (showMore? "" : "line-clamp-[8]")} dangerouslySetInnerHTML={{__html: html}}/>
 			<Button className="my-2" variant={"secondary"} onClick={toggleShow}>
 				{!showMore? "Show more" : "Show less"}
