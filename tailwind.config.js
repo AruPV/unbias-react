@@ -20,8 +20,8 @@ module.exports = {
     },
     extend: {
 			backgroundImage: {
-				'graph_dark': "url('./src/assets/graph-paper.svg')",
-				'graph_light': "url('./src/assets/graph-light.svg')"
+				'graph_dark': "url('./public/graph-paper.svg')",
+				'graph_light': "url('./public/graph-light.svg')"
 			},
 			fontFamily: {
 				roboto: ['Roboto'],
