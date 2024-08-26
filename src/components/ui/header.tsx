@@ -6,7 +6,7 @@ import Logo from "./logo"
 
 function Header(){
   return(
-    <div className="relative sticky z-50 bg-background/70 backdrop-blur top-0 py-2 flex flex-row justify-between px-2 py-1 bg-background border border-secondary/30 border-x-transparent border-t-transparent content-center">
+    <div className="relative sticky z-50 bg-background/70 backdrop-blur top-0 py-2 grid grid-cols-3 justify-between px-2 py-1 bg-background border border-secondary/30 border-x-transparent border-t-transparent content-center">
 			<div className="">
 				<Link to={"/"}>
 					<Logo className="animate-all transition-all ease-in-out fill-primary hover:fill-primary/70 w-32 h-10 pl-2" />
@@ -19,7 +19,7 @@ function Header(){
 					</Button>
 				</SignedIn>
 			</Link>
-			<div className="flex flex-row">
+			<div className="flex flex-row self-right justify-end">
 				<ModeToggle/>
 				<SignedOut>
 					<Button className="ml-3" variant={"secondary"}>
