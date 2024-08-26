@@ -19,8 +19,13 @@ module.exports = {
       },
     },
     extend: {
+			backgroundImage: {
+				'graph_dark': "url('./src/assets/graph-paper.svg')",
+				'graph_light': "url('./src/assets/graph-light.svg')"
+			},
 			fontFamily: {
-				roboto: ['Roboto']
+				roboto: ['Roboto'],
+				roboto_mono: ['Roboto_Mono'],
 			},
       colors: {
         border: "hsl(var(--border))",

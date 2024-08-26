@@ -40,7 +40,7 @@ function Article({data, className}:props){
 			<Accordion type="single" defaultValue="item-1" collapsible>
 				<AccordionItem value="item-1">
 					<AccordionTrigger className="text-primary font-bold text-xl"> ~ Metrics </AccordionTrigger>
-					<AccordionContent>
+					<AccordionContent className="text-primary">
 						<ul>
 							<li>🌡️<b>Bias Score</b>: {isValid(data.bias_score) && data.bias_score}</li>
 							<li>⚡<b>Shock Score</b>: {isValid(data.shock_score) && data.shock_score}</li>

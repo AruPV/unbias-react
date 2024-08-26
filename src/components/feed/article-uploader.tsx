@@ -76,7 +76,7 @@ export default function ArticleUploader({addArticlesCallback}: props){
 	}
 
   return (
-		<div className="flex flex-col items-center">
+		<div className="flex flex-col items-center text-primary">
 				<div className='my-3 flex flex-row items-center '>
 				<Input 
 					onSubmit={handleSubmit} 

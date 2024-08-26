@@ -17,12 +17,12 @@ function ProseSkeleton(){
 
 export default function ArticleSkeleton(){
 	return(
-		<>
+		<div className="">
 			<TitleSkeleton/>
 			<ProseSkeleton/>
 			<ProseSkeleton/>
 			<ProseSkeleton/>
 			<ProseSkeleton/>
-		</>
+		</div>
 	)
 }

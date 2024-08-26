@@ -10,7 +10,7 @@ export default function LoadingSpinner(){
 			strokeWidth="2"
 			strokeLinecap="round"
 			strokeLinejoin="round"
-			className={"animate-spin size-12 opacity-30"}
+			className={"animate-spin size-12 opacity-30 stroke-primary"}
 
 		>
 			<path d="M21 12a9 9 0 1 1-6.219-8.56" />

@@ -15,16 +15,17 @@ if (!PUBLISHABLE_KEY){
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
 		<ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
+		<div className="bg-background">
 			<ClerkProvider 
 				publishableKey={PUBLISHABLE_KEY}
 				appearance={{
 					variables: {
-						colorPrimary: 'hsl(142.1 76.2% 36.3%)' // To match shadcn theme. from https://github.com/stormynight9/clerk-shadcn-theme
 					},
 				}}
 				>
 				<Router/>
 			</ClerkProvider>
+		</div>
 		</ThemeProvider>
   </StrictMode>,
 )
