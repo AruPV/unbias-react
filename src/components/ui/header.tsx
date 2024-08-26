@@ -1,8 +1,9 @@
 import { ModeToggle } from "./mode-toggle"
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react"
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react"
 import { Button } from "./button"
 import { Link } from "react-router-dom"
 import Logo from "./logo"
+import SignInButton from "../clerk/sign-in-button"
 
 function Header(){
   return(
@@ -22,9 +23,7 @@ function Header(){
 			<div className="flex flex-row self-right justify-end">
 				<ModeToggle/>
 				<SignedOut>
-					<Button className="ml-3" variant={"secondary"}>
 					<SignInButton/>
-					</Button>
 				</SignedOut>
 				<SignedIn>
 					<UserButton/>

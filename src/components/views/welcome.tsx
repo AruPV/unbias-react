@@ -1,7 +1,6 @@
-import { SignUpButton } from "@clerk/clerk-react"
 import { Sparkles } from "lucide-react"
-import BrutalistButton from "../ui/brutalist-button"
 import { useState } from "react"
+import SignUpButton from "../clerk/sign-up-button";
 
 export default function WelcomeView(){
 	const [value, changeValue] = useState("terms");
@@ -27,12 +26,8 @@ export default function WelcomeView(){
 							<Sparkles className="inline size-8 pb-2 self-align-top animate-pulse stroke-primary"/>
 						</div>
 						</div>
+							<SignUpButton/>
           </p>
-						<BrutalistButton>
-							<SignUpButton>
-								Join
-							</SignUpButton>
-						</BrutalistButton>
         </div>
       </div>
 			<div className="h-96 w-full border border-transparent  border-t-secondary/40"></div>
