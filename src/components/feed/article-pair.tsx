@@ -8,7 +8,7 @@ interface props{
 }
 
 export default function ArticlePair({ articlePair }:props){
-	const [showOriginal, setShowOriginal] = useState(true)
+	const [showOriginal, setShowOriginal] = useState(false)
 	const currentArticle = (!showOriginal && articlePair.unbiased !== undefined) ? articlePair.unbiased : articlePair.original
 
 	const switchArticle = ()=>{

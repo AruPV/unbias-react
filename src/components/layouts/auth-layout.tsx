@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { useAuth } from '@clerk/clerk-react'
 import { Outlet, useNavigate } from 'react-router-dom'
+import LoadingSpinner from '../ui/spinner'
 
-export default function ProtectedLayout() {
+export default function AuthLayout() {
   const { userId, isLoaded } = useAuth()
   const navigate = useNavigate()
 
@@ -10,11 +11,15 @@ export default function ProtectedLayout() {
 
   React.useEffect(() => {
     if (isLoaded && !userId) {
-      navigate('/sign-in')
+      navigate('/welcome')
     }
   }, [isLoaded])
 
-  if (!isLoaded) return 'Loading...'
+  if (!isLoaded) return (
+		<div className="flex flex-col items-center h-svh justify-center">
+			<LoadingSpinner/>
+		</div>
+	)
 
   return <Outlet />
 }

@@ -7,7 +7,7 @@ interface props{
 	inverted?: boolean
 }
 
-export default function VersionTag({callback, active = false, inverted = false}: props){
+export default function VersionTag({callback, active = true, inverted = false}: props){
 	const [isActive, setIsActive] = useState(active)
 	const text = isActive ? "Unbiased" : "Original"
 

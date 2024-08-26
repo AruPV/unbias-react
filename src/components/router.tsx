@@ -4,26 +4,32 @@ import {
 	createRoutesFromElements,
 	Route,
 } from "react-router-dom"
-import App from "@/app.tsx"
-import PublicFeed from "./views/public-feed"
-import ArticleUploader from "./feed/article-uploader"
-import ProtectedLayout from "./layouts/protected-layout"
-import SignInPage from "./views/sign-in"
-import SignUpPage from "./views/sign-up"
-import Profile from "./views/profile"
+import AuthLayout from "@/components/layouts/auth-layout"
+import NoAuthLayout from "@/components/layouts/no-auth-layout"
+import HeaderFooterLayout from "@/components/layouts/header-footer-layout"
+
+
+import PublicFeed from "@/components/views/public-feed"
+import ArticleUploader from "@/components/feed/article-uploader"
+import SignInPage from "@/components/views/sign-in"
+import SignUpPage from "@/components/views/sign-up"
+import Profile from "@/components/views/profile"
+import WelcomeView from "@/components/views/welcome"
 
  
 const router = createBrowserRouter(
 	createRoutesFromElements(
-		<Route path="/" element={<App/>}>
-			<Route path="sign-in" element={<SignInPage/>}/>
-			<Route path="sign-up" element={<SignUpPage/>}/>
-			<Route index element={<PublicFeed />} />
-			<Route element={<ProtectedLayout/>}>
-				<Route path="new" element={<ArticleUploader/>} />
-				<Route path=":user" element={<Profile/>} />
-				<Route path="articles" element={<PublicFeed/>} >
-				</Route>
+		<Route path="/" element={<HeaderFooterLayout/>}>
+			<Route element={<AuthLayout/>}>
+					<Route index element={<PublicFeed />} />
+					<Route path="new" element={<ArticleUploader/>} />
+					<Route path=":user" element={<Profile/>} />
+			</Route>
+
+			<Route element={<NoAuthLayout/>}>
+				<Route path="welcome" element={<WelcomeView/>}/>
+				<Route path="sign-in" element={<SignInPage/>}/>
+				<Route path="sign-up" element={<SignUpPage/>}/>
 			</Route>
 		</Route>
 	)
