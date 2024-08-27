@@ -11,3 +11,13 @@ export type ArticlePairData = {
 	original: ArticleData,
 	unbiased: ArticleData | undefined
 } 
+
+export type UserData = {
+	username: string,
+	image: string,
+}
+
+export type UserProfileData = {
+	user: UserData,
+	articles: ArticlePairData[],
+}

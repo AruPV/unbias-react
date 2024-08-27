@@ -3,6 +3,7 @@ import {
 	RouterProvider,
 	createRoutesFromElements,
 	Route,
+  redirect,
 } from "react-router-dom"
 import AuthLayout from "@/components/layouts/auth-layout"
 import NoAuthLayout from "@/components/layouts/no-auth-layout"
@@ -34,8 +35,18 @@ const router = createBrowserRouter(
 			</Route>
 
 			<Route element={<NoAuthLayout/>}>
-				<Route path="sign-in" element={<SignInPage/>}/>
-				<Route path="sign-up" element={<SignUpPage/>}/>
+				<Route path="sign-in" element={<SignInPage/>}>
+					<Route path="sso-callback" action={async ()=>{
+						return redirect("/sign-up")
+					}}>
+					</Route>
+				</Route>
+				<Route path="sign-up" element={<SignUpPage/>}>
+					<Route path="sso-callback" action={async ()=>{
+						return redirect("/sign-in")
+					}}>
+					</Route>
+				</Route>
 			</Route>
 			</>
 		</Route>
