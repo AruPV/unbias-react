@@ -16,7 +16,7 @@ export default function ArticlePair({ articlePair }:props){
 	}
 
 	return(
-		<div className="flex flex-row items-start divide-solid">
+		<div className="flex flex-row items-start justify-middle divide-solid">
 			<Article data={currentArticle} className="border-r transition transition-all ease-in-out pr-4"/>
 			<VersionTag callback={switchArticle}/>
 		</div>

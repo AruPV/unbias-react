@@ -33,7 +33,7 @@ function Article({data, className}:props){
 
 	return(
 		<div className={className}>
-			<div className={"prose dark:prose-invert my-4 " + (showMore? "" : "line-clamp-[8]")} dangerouslySetInnerHTML={{__html: html}}/>
+			<div className={"prose dark:prose-invert my-4 prose-sm lg:prose-base " + (showMore? "" : "line-clamp-[8]")} dangerouslySetInnerHTML={{__html: html}}/>
 			<Button className="my-2" variant={"secondary"} onClick={toggleShow}>
 				{!showMore? "Show more" : "Show less"}
 			</Button>

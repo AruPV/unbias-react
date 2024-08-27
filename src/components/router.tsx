@@ -19,18 +19,25 @@ import WelcomeView from "@/components/views/welcome"
  
 const router = createBrowserRouter(
 	createRoutesFromElements(
-		<Route path="/" element={<HeaderFooterLayout/>}>
-			<Route element={<AuthLayout/>}>
-					<Route index element={<PublicFeed />} />
-					<Route path="new" element={<ArticleUploader/>} />
-					<Route path=":user" element={<Profile/>} />
+		<Route path="/">
+			<>
+			<Route element={<HeaderFooterLayout/>}>
+				<Route element={<AuthLayout/>}>
+						<Route index element={<PublicFeed />} />
+						<Route path="new" element={<ArticleUploader/>} />
+						<Route path=":user" element={<Profile/>} />
+				</Route>
+
+				<Route element={<NoAuthLayout/>}>
+					<Route path="welcome" element={<WelcomeView/>}/>
+				</Route>
 			</Route>
 
 			<Route element={<NoAuthLayout/>}>
-				<Route path="welcome" element={<WelcomeView/>}/>
 				<Route path="sign-in" element={<SignInPage/>}/>
 				<Route path="sign-up" element={<SignUpPage/>}/>
 			</Route>
+			</>
 		</Route>
 	)
 )

@@ -26,7 +26,7 @@ export default function PublicFeed(){
 	return(
 		<div className="flex flex-col items-center my-10">
 			<h2 className="text-3xl font-bold text-primary">Public Unbiased</h2>
-			<div className="transition transition-all ease-in-out flex flex-col space-y-8">
+			<div className="transition transition-all ease-in-out flex flex-col space-y-8 mx-4">
 				{articles?.map(articlePair=>(
 					articlePair !== undefined && <ArticlePair	articlePair={articlePair}/>
 				))}

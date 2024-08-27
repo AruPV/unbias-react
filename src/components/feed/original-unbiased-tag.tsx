@@ -17,7 +17,7 @@ export default function VersionTag({callback, active = true, inverted = false}: 
 	}
 
 	return(
-		<button onClick={handleClick}>
+		<button className="m-0 p-0 px-0" onClick={handleClick}>
 			<Tag inverted={inverted} active={isActive}>{text}</Tag>
 		</button>
 	)
