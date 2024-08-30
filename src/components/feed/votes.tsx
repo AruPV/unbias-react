@@ -1,14 +1,19 @@
 import { ArrowUp, ArrowDown } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import backendRequest from "../utils/backend-requester"
 
 interface props{
-	initialVotes: number
-	initialVoteState: number
+	initialVotes: number,
+	initialVoteState: number,
+	articleID: number,
 }
 
-export default function Votes({initialVotes, initialVoteState}:props){
+export default function Votes({initialVotes, initialVoteState, articleID}:props){
 	const [ voteState, setVoteState ] = useState(initialVoteState)
 	const [ votes, setVotes ] = useState(initialVotes)
+	const patchRequest = backendRequest(`articles/${articleID}/vote`,"PATCH")
+	// @ts-ignore
+	const deleteRequest: ()=>Promise<void> = backendRequest(`articles/${articleID}/vote`, "DELETE")
 
 	/*
 	const handleRequest = () =>{
@@ -21,6 +26,17 @@ export default function Votes({initialVotes, initialVoteState}:props){
 	}
 	*/
 
+	useEffect(()=>{
+		console.log(voteState)
+		if (!voteState){
+			deleteRequest()	
+			return
+		}
+		
+		const isLike = voteState == 1 ? true : false
+		patchRequest({"is_like": isLike})
+	},[voteState])
+
 	const handleUpvote = ()=>{
 		const change = voteState == 1 ? -1 : (-voteState + 1)
 		setVoteState(voteState + change)
@@ -28,7 +44,7 @@ export default function Votes({initialVotes, initialVoteState}:props){
 	}
 
 	const handleDownvote = ()=>{
-		const change = voteState == -1 ? +1 : (-voteState - 1)
+		const change = voteState == -1 ? 1 : (-voteState - 1)
 		setVoteState(voteState + change)
 		setVotes(votes + change)
 	}
