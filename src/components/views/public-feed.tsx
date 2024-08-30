@@ -12,7 +12,7 @@ async function getArticles(
 	const json = await response.json()
 	console.log(json)
 	const validArticles = json.filter((articlePair: ArticlePairData) => articlePair.unbiased?.title !== undefined)
-	callback(validArticles.reverse())
+	callback(validArticles)
 }
 
 export default function PublicFeed(){
